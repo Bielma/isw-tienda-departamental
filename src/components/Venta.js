@@ -6,11 +6,20 @@ import VentaForm from './VentaForm.js';
 
 
 class Venta extends Component{
+   
+    state = {
+        articulos: [
+           {codigo: '',cantidad: 0, precio:0 }
+        ],
+    };
 
     agregarArticulo = () =>{
         this.setState({
-
+            
         });
+    }
+    eliminarItem = () => {
+
     }
     render(){        
         return(
@@ -23,7 +32,7 @@ class Venta extends Component{
                
                   </section>
                 </section>
-               <VentaForm/>
+               <VentaForm agregarArticulo = {this.agregarArticulo}/>
               <div className = "clearfix"></div>
               </div>   
               <Footer/>

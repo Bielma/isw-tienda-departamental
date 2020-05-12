@@ -45,6 +45,10 @@ body{
   color: #40c034;
 
 }
+.active{
+  border-bottom: 2px solid #3cb2d3;
+  
+}
 
 .clearfix{
   clear: both;

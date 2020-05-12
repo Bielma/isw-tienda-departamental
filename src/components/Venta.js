@@ -8,20 +8,45 @@ import VentaForm from './VentaForm.js';
 class Venta extends Component{
    
     state = {
-        articulos: [
-           {codigo: '',cantidad: 0, precio:0 }
-        ],
+        //articulos : {}
+          articulos: []
     };
 
-    agregarArticulo = () =>{
-        this.setState({
-            
-        });
+    agregarArticulo = (articulo) =>{
+      
+      this.setState({
+        //articulos.push({codigo: articulo.codigo, nombre: articulo.nombre, cantidad: articulo.cantidad, precio: articulo.precio,})
+        articulos : [...this.state.articulos, {codigo: articulo.codigo, nombre: articulo.nombre, cantidad: articulo.cantidad, precio: articulo.precio},]
+        //[articulos] : [...]
+      })
+
+
+      console.log(this.state.articulos)
     }
-    eliminarItem = () => {
+    eliminarItem = () => { 
 
     }
-    render(){        
+    guardarVenta = () =>
+    {
+      
+    }
+    
+    itemTableRows = ()  => {
+      console.log("Imprimiendo items..");
+      this.state.articulos.map(item =>(
+        <Articulos  item = {item} key = {item.codigo}/>    
+      ))
+    }
+
+
+    
+
+    render(){         
+        var hayProductos = false;
+        if(this.state.articulos.length >= 1){
+          hayProductos =true;
+        }
+
         return(
             <div className="FormVenta">
             <Header/>                    
@@ -29,7 +54,27 @@ class Venta extends Component{
                 <section id = "content">
                 <h2>Articulos</h2>
                   <section className = "componentes">                            
-               
+                      <table id = "tabla"  > 
+                        <thead>
+                          <tr>
+                            <th>Articulo</th>  
+                            <th>Precio</th>  
+                            <th>Cantidad</th>  
+                            <th>Importe</th> 
+                          </tr>  
+                        </thead> 
+                        <tbody>            
+
+                          {
+                             this.state.articulos.map(item =>(
+                                
+                              <Articulos  item = {item} key = {item.codigo} hay = {hayProductos}/>    
+                            
+                              ))
+                            //this.itemTableRows
+                          }                          
+                        </tbody>
+                      </table>
                   </section>
                 </section>
                <VentaForm agregarArticulo = {this.agregarArticulo}/>

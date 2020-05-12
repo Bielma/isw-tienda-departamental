@@ -1,39 +1,37 @@
-/*
-
-    Registrar
-    Mostrar Todos
-    Buscar
-
-*/
-
+import Header from './Header.js';
+import Sidebar from './Sidebar.js';
+import Footer from './Footer.js'
 import React, { Component } from "react";
 
 class Cliente extends Component{
+    
     render(){
+        var list = [];
         return (
-            <div className = "center">
+            
+            <div className="App">
+            <Header/>
+            
+        
+              <div className = "center">
                 <section id = "content">
-                    <h2>Todos los Clientes</h2>
+                <h2>Todos los Clientes</h2>
+                  <section className = "componentes">
+                    
+        
+                  </section>
                 </section>
-                <aside id = "sidebar">
-                    <div id = "nav-panel" className = "sidebar-item">
-                        <h3> Opciones</h3>
-                        <a href="#" className = "btn btn-succes">Registrar cliente</a>        
-                    </div>
+              <Sidebar/>
+              <div className = "clearfix"></div>
+              </div>   
+              <Footer/>
+            </div>
 
-                    <div id = "search" className = "sidebar-item">
-                    <h3>Buscador </h3>
-                    <p>Busca un cliente</p>
-                    <form>
-                        <input type = "text" name ="search"/>
-                        <input type = "submit" name ="submit" value = "Buscar" className= "btn"/>
-                    </form>
-                
-                </div>
-                </aside>
-                <div className ="clearfix"></div>
-                
-            </div>        
+
+
+
+            
+            
             
         );
     }

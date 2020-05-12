@@ -16,7 +16,7 @@ class Header extends Component{
                             <a href = "index.html">Inicio</a>
                         </li>
                         <li>
-                            <a href = "index.html">Clientes</a>
+                            <a href = "  .html">Clientes</a>
                         </li>
                         <li>
                             <a href = "index.html">Empleados</a>

@@ -9,7 +9,8 @@ import MovimientoAlmacen from './components/Movimientos_Almacen/MovimientoAlmace
 function App() {
   return (
     <div className="App">
-      <MovimientoAlmacen/>
+      {/*poner MOvAlmancen antes de hacer merge*/}
+      <Venta/>
     </div>
   );
 }

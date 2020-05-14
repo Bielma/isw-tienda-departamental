@@ -10,30 +10,30 @@ class VentaForm extends Component {
     creditoRef = React.createRef();
     tarjetaRef = React.createRef();
 
+   
     
     
 
-    buscarArticulo = (codigo) =>{
-
-        axios.get("bielma/productos")
-            .then(res =>{
-                return res.data.art;
-            });
-
-      
-    }
+   
     agregar = (e) => {
-        e.preventDefault();
-       //const [name, price] = this.buscarArticulo(this.codigoProductoRef.current.value);
+        e.preventDefault();        
+        axios.get('http://bielma.com/sem-isw/producto/'+ this.codigoProductoRef.current.value)
+        .then(res =>{
+            var articulo = {
+                codigo: this.codigoProductoRef.current.value,
+                nombre: res.data.product.nombre ,
+                cantidad: this.cantidadRef.current.value,
+                precio: res.data.product.precio,
+                descripcion: res.data.product.descripcion
+            }
+        this.props.agregarArticulo(articulo);     
+        
+        
+        console.log(res.status);
+        });
 
-
-        var articulo = {
-            codigo: this.codigoProductoRef.current.value,
-            nombre: 'Item',
-            cantidad: this.cantidadRef.current.value,
-            precio: 100
-          }
-        this.props.agregarArticulo(articulo);        
+       
+        
     }
     
     vender = (e) =>{
@@ -65,16 +65,12 @@ class VentaForm extends Component {
                     <form className="mid-form" onSubmit={this.agregar}>
                         <div>
                             <label htmlFor="codigo"> Código del producto:</label>                            
-                            <input type="text" name="search" ref = {this.codigoProductoRef}/>                        
+                            <input type="text" name="codigo" ref = {this.codigoProductoRef} />                        
                         </div>                        
                         <div>
                             <label htmlFor="cantidad">Cantidad:</label>                            
                             <input type="text" name="cantidad" ref = {this.cantidadRef}/>                        
-                        </div>
-                        <div>
-                            <label htmlFor="desc">Descripcion:</label>                            
-                            <input type="text" name="desc" ref = {this.descRef} />                        
-                        </div>
+                        </div>                        
                         <input type="submit" name="submit" value="Agregar" className="btn" />
                     </form>
 

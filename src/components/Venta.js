@@ -68,7 +68,7 @@ class Venta extends Component{
                           {
                              this.state.articulos.map(item =>(
                                 
-                              <Articulos  item = {item} key = {item.codigo} hay = {hayProductos}/>    
+                              <Articulos  item = {item} key = {item.codigo} i = {1}/>    
                             
                               ))
                             //this.itemTableRows

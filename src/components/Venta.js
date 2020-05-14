@@ -31,15 +31,6 @@ class Venta extends Component{
       
     }
     
-    itemTableRows = ()  => {
-      console.log("Imprimiendo items..");
-      this.state.articulos.map(item =>(
-        <Articulos  item = {item} key = {item.codigo}/>    
-      ))
-    }
-
-
-    
 
     render(){         
         var hayProductos = false;
@@ -66,18 +57,15 @@ class Venta extends Component{
                         <tbody>            
 
                           {
-                             this.state.articulos.map(item =>(
-                                
-                              <Articulos  item = {item} key = {item.codigo} i = {1}/>    
-                            
-                              ))
-                            //this.itemTableRows
+                             this.state.articulos.map(item =>(                                
+                                <Articulos  item = {item} key = {item.codigo} i ={1}/>                                
+                              ))                            
                           }                          
                         </tbody>
                       </table>
                   </section>
                 </section>
-               <VentaForm agregarArticulo = {this.agregarArticulo}/>
+               <VentaForm agregarArticulo = {this.agregarArticulo} guardarVenta = {this.guardarVenta}/>
               <div className = "clearfix"></div>
               </div>   
               <Footer/>

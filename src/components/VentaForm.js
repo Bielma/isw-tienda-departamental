@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import axios from 'axios';
 class VentaForm extends Component {
 
     codigoProductoRef = React.createRef();
@@ -10,36 +10,57 @@ class VentaForm extends Component {
     creditoRef = React.createRef();
     tarjetaRef = React.createRef();
 
+    
+    
+
     buscarArticulo = (codigo) =>{
 
+        axios.get("bielma/productos")
+            .then(res =>{
+                return res.data.art;
+            });
+
+      
     }
     agregar = (e) => {
         e.preventDefault();
-        //this.buscarArticulo(this.codigoProductoRef.current.value);
+       //const [name, price] = this.buscarArticulo(this.codigoProductoRef.current.value);
 
-        console.log("Cod: ", this.codigoProductoRef.current.value);
 
         var articulo = {
-
             codigo: this.codigoProductoRef.current.value,
             nombre: 'Item',
             cantidad: this.cantidadRef.current.value,
             precio: 100
-
           }
-        this.props.agregarArticulo(articulo);
-        console.log("Agregado");
-        console.log(articulo);
+        this.props.agregarArticulo(articulo);        
     }
     
+    vender = (e) =>{
+        var pago = '';
+        e.preventDefault();        
+        if(this.cashRef.current.checked === true){
+            console.log("Pago en efectivo");
+            pago = 'Efectivo';
+        }else if(this.tarjetaRef.current.checked === true){
+            pago = 'Tarjeta';
+        }else if(this.creditoRef.current.checked === true){
+            pago = 'Credito';
+        }
 
+        var detalles = {
+            metodo_pago : pago,
+            cod_cliente : this.codClienteRef.current.value
+        }                
+        this.props.guardarVenta(detalles);  
+    }
 
 
     render() {
         return (
             <aside id="sidebar">
                 <div id="articulo" className="sidebar-item">
-                    <h3>Venta </h3>
+                    <h3> </h3>
                     <p>Agregar un articulo</p>
                     <form className="mid-form" onSubmit={this.agregar}>
                         <div>
@@ -58,17 +79,17 @@ class VentaForm extends Component {
                     </form>
 
                     <div id="panel-cliente" className="sidebar-item">
-                        <h3>Cliente</h3>
-                        <form >
+                        <h3>Venta</h3>
+                        <form className  ="mid-form" onSubmit = {this.vender}>
                         <div>
                             <label htmlFor="cod-cliente"> Código de cliente</label>                            
                             <input type="text" name="cod-cliente" ref = {this.codClienteRef}/>                        
                         </div>
                             <a href="#" className="btn btn-succes">Registrar cliente</a>
-                            <div className="">
-                                <input type="radio" name="metodo-pago" vaue="Cash" ref = {this.cashRef}/> Cash
-                                <input type="radio" name="metodo-pago" vaue="Tarjeta" ref = {this.tarjetaRef}/> Tarjeta
-                                <input type="radio" name="metodo-pago" vaue="Credito tienda" ref = {this.creditoRef}/> Credito
+                            <div className="radio-btns">
+                                <input type="radio" name="metodo-pago" value="Cash" ref = {this.cashRef}   checked={true}/> Cash
+                                <input type="radio" name="metodo-pago" value="Tarjeta" ref = {this.tarjetaRef}/> Tarjeta
+                                <input type="radio" name="metodo-pago" value="Credito tienda" ref = {this.creditoRef}/> Credito
                                 <input type="submit" name="submit" value="Hacer venta" className="btn" />
                             </div>
 

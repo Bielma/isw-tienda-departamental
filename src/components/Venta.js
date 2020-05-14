@@ -7,28 +7,40 @@ import VentaForm from './VentaForm.js';
 
 class Venta extends Component{
    
-    state = {
-        //articulos : {}
+    state = {          
           articulos: []
     };
 
     agregarArticulo = (articulo) =>{
       
-      this.setState({
-        //articulos.push({codigo: articulo.codigo, nombre: articulo.nombre, cantidad: articulo.cantidad, precio: articulo.precio,})
-        articulos : [...this.state.articulos, {codigo: articulo.codigo, nombre: articulo.nombre, cantidad: articulo.cantidad, precio: articulo.precio},]
-        //[articulos] : [...]
+      this.setState({                
+        articulos : [...this.state.articulos, {codigo: articulo.codigo, nombre: articulo.nombre, cantidad: articulo.cantidad, precio: articulo.precio},]        
       })
-
-
-      console.log(this.state.articulos)
+//      console.log(this.state.articulos)
     }
     eliminarItem = () => { 
 
     }
-    guardarVenta = () =>
-    {
-      
+    guardarVenta = (detalles) =>{
+        /*var venta = {        
+          //codigo: [{this.codigoProductoRef.current.value}],
+          nombre: 'Item',
+          cantidad: this.cantidadRef.current.value,
+          precio: 100,
+          cliente: this.codClienteRef.current.value,
+          pago: Cash
+        };*/
+        var venta = [
+          
+        ];
+
+        var venta2 = [];
+        venta2['cliente'] = detalles.cod_cliente;
+        venta2["forna-pago"] = detalles.metodo_pago;
+        venta2['productos'] = this.state.articulos;
+               
+        console.log(venta2);
+
     }
     
     itemTableRows = ()  => {
@@ -36,6 +48,8 @@ class Venta extends Component{
       this.state.articulos.map(item =>(
         <Articulos  item = {item} key = {item.codigo}/>    
       ))
+
+      
     }
 
 
@@ -66,10 +80,8 @@ class Venta extends Component{
                         <tbody>            
 
                           {
-                             this.state.articulos.map(item =>(
-                                
-                              <Articulos  item = {item} key = {item.codigo} hay = {hayProductos}/>    
-                            
+                             this.state.articulos.map(item =>(                                
+                              <Articulos  item = {item} key = {item.codigo} hay = {hayProductos}/>                                
                               ))
                             //this.itemTableRows
                           }                          
@@ -77,7 +89,7 @@ class Venta extends Component{
                       </table>
                   </section>
                 </section>
-               <VentaForm agregarArticulo = {this.agregarArticulo}/>
+               <VentaForm agregarArticulo = {this.agregarArticulo} guardarVenta = {this.guardarVenta}/>
               <div className = "clearfix"></div>
               </div>   
               <Footer/>

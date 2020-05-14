@@ -3,12 +3,14 @@ import React, { Component } from 'react';
 class Articulos extends Component {
 
     render() {
-        //const {articulo, precio, cantidad} = this.props.articulos;
-        console.log(this.props.hay)
-        if (this.props.hay) {
-            
+        
+
+
+       
+        if (this.props.i ===1) {
+            console.log("Vista Venta");
             return (
-                <tr key={this.props.item.nombre}>
+                <tr key={this.props.item.codigo}>
                     <td>{this.props.item.nombre}</td>
                     <td>{this.props.item.precio}</td>
                     <td>{this.props.item.cantidad}</td>
@@ -17,19 +19,19 @@ class Articulos extends Component {
 
 
             );
-        } else {
-            return (
-                
-                <tr key = {"fail"}>
-                    <td>Agrege un articulo.</td>
-                    {console.log("sin dato")}
+        } else if(this.props.i ===2 ){
+            console.log("Vista Devolucion");
+            return (                                
+                <tr key={this.props.item.codigo}>
+                    <td>{this.props.item.nombre}</td>                    
+                    <td>{this.props.item.cantidad}</td>
+                    <td>{this.props.item.motivo}</td>
                 </tr>
-                
 
             );
         }
 
-
+       
     }
 }
 

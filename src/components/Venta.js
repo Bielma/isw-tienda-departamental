@@ -26,9 +26,14 @@ class Venta extends Component{
     eliminarItem = () => { 
 
     }
-    guardarVenta = () =>
+    guardarVenta = (detalles) =>
     {
-      
+      var venta2 = [];
+      venta2['cliente'] = detalles.cod_cliente;
+      venta2["forna-pago"] = detalles.metodo_pago;
+      venta2['productos'] = this.state.articulos;
+             
+      console.log(venta2);
     }
     
 

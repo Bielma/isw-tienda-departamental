@@ -9,7 +9,7 @@ import Devolucion from './components/Devolucion.js';
 function App() {
   return (
     <div className="App">
-      <Devolucion/>
+      <MovimientoAlmacen/>
     </div>
   );
 }

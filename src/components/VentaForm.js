@@ -19,14 +19,19 @@ class VentaForm extends Component {
         e.preventDefault();        
         axios.get('http://bielma.com/sem-isw/producto/'+ this.codigoProductoRef.current.value)
         .then(res =>{
-            var articulo = {
-                codigo: this.codigoProductoRef.current.value,
-                nombre: res.data.product.nombre ,
-                cantidad: this.cantidadRef.current.value,
-                precio: res.data.product.precio,
-                descripcion: res.data.product.descripcion
+            if(res.status === 200){
+                var articulo = {
+                    codigo: this.codigoProductoRef.current.value,
+                    nombre: res.data.product.nombre ,
+                    cantidad: this.cantidadRef.current.value,
+                    precio: res.data.product.precio,
+                    descripcion: res.data.product.descripcion
+                }
+                this.props.agregarArticulo(articulo);     
+            }else{
+
             }
-        this.props.agregarArticulo(articulo);     
+            
         
         
         console.log(res.status);
@@ -60,7 +65,7 @@ class VentaForm extends Component {
         return (
             <aside id="sidebar">
                 <div id="articulo" className="sidebar-item">
-                    <h3> </h3>
+                    <h3>dd </h3>
                     <p>Agregar un articulo</p>
                     <form className="mid-form" onSubmit={this.agregar}>
                         <div>

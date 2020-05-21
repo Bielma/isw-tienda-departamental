@@ -10,7 +10,7 @@ function App() {
   return (
     <div className="App">
       {/*poner MOvAlmancen antes de hacer merge*/}
-      <Venta/>
+      <MovimientoAlmacen/>
     </div>
   );
 }

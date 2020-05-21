@@ -9,24 +9,37 @@ class DevForm extends Component {
     folioVentaRef =  React.createRef();
     motivoRef  = React.createRef();
 
-    buscarArticulo = (codigo) =>{
-
-        axios.get("bielma/productos")
-            .then(res =>{
-                return res.data.art;
-            });
-
-      
+    state = {
+        message : ''
     }
+   
     agregar = (e) => {
-        e.preventDefault();
-        var articulo = {
-            codigo: this.codigoProductoRef.current.value,
-            nombre: 'Item',
-            cantidad: this.cantidadRef.current.value,
-            motivo: this.motivoRef.current.value
-          }
-        this.props.agregarArticulo(articulo);        
+        e.preventDefault();          
+        axios.get('http://bielma.com/sem-isw/producto/' + this.codigoProductoRef.current.value)
+        .then(res => {
+            console.log(res.data.code === 200);
+            if(res.data.code === 200){
+                var articulo = {
+                    codigo: res.data.product.id_producto,
+                    nombre: res.data.product.nombre,
+                    cantidad: this.cantidadRef.current.value,
+                    motivo: this.motivoRef.current.value
+                }
+                this.props.agregarArticulo(articulo);        
+            }else{
+                console.log('Error')
+                this.setState({
+                    message : res.data.message
+                })
+            }
+            
+            
+            console.log(res.data.message);
+            console.log(res.data.product);                
+            
+        });   
+                 
+       
     }
     
     devolver = (e) =>{
@@ -39,7 +52,7 @@ class DevForm extends Component {
         return (
             <aside id="sidebar">
                 <div id="articulo" className="sidebar-item">
-                    <h3> </h3>
+                    <h3>{this.state.message} </h3>
                     <p>Agregar un articulo</p>
                     <form className="mid-form" onSubmit={this.agregar}>
                        

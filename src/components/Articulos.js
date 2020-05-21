@@ -10,10 +10,9 @@ class Articulos extends Component {
                     <td>{this.props.item.nombre}</td>
                     <td>{this.props.item.precio}</td>
                     <td>{this.props.item.cantidad}</td>
-                    <td>{this.props.item.cantidad * this.props.item.precio}</td>
-                </tr>
-
-
+                    <td>{this.props.item.cantidad * this.props.item.precio}</td>                                        
+                </tr>                
+                
             );
         } else if(this.props.i ===2 ){
             console.log("Vista Devolucion");
@@ -25,7 +24,7 @@ class Articulos extends Component {
                 </tr>
             );
         } else if(this.props.i ===3 ){
-            console.log("Vista Devolucion");
+            console.log("Vista Mov Almacen");
             return (                                
                 <tr key={this.props.item.folio}>
                     <td>{this.props.item.fecha}</td>                    
@@ -33,6 +32,15 @@ class Articulos extends Component {
                     <td>{this.props.item.motivo}</td>
                 </tr>
 
+            );
+        } else if(this.props.i ===4 ){
+            console.log("Vista Devolucion");
+            return (                                
+                <tr key={this.props.item.codigo}>
+                    <td>{this.props.item.nombre}</td>                    
+                    <td>{this.props.item.cantidad}</td> 
+                    <td>{this.props.item.precio}</td> 
+                </tr>
             );
         }
 

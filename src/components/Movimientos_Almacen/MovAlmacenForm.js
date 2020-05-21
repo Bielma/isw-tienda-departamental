@@ -17,7 +17,9 @@ class MovAlmacenForm extends Component {
     devProvRef = React.createRef();
     opc1Ref =  React.createRef();
     opc2Ref =  React.createRef();
-    
+    codigoProductoRef = React.createRef();
+    cantidadRef = React.createRef();
+
     state = {
         opc1 : 'Compra',
         opc2 : 'Devolucion Cliente',
@@ -25,24 +27,45 @@ class MovAlmacenForm extends Component {
         motivo: ''
     }
 
-    registarMov = (e) => {
-        e.preventDefault();
-      
-      
-
-        var movAlmacen = {
-            fecha: '14-05-20',
+    registrarMov = (e) => {
+        e.preventDefault();            
+        var movAlmacen = {       
+            fecha : this.fechaRef.current.value,
             tipo: this.state.tipo,
             motivo: this.state.motivo,
-            id_empleado: this.idEmpleadoRef,
-            folio_doc: this.folioDocRef,
-            codigo: 1,
-            cantidad: 1
+            folio_doc: this.folioDocRef.current.value,
         }
-
         console.log(movAlmacen);
-        //this.props.agregarArticulo(articulo);        
+        this.props.agregarMov(movAlmacen);        
     }
+   
+    agregarProducto = (e) => {
+        e.preventDefault();          
+        axios.get('http://bielma.com/sem-isw/producto/' + this.codigoProductoRef.current.value)
+        .then(res => {
+            console.log(res.data.code === 200);
+            if(res.data.code === 200){
+                var articulo = {
+                    codigo: res.data.product.id_producto,
+                    nombre: res.data.product.nombre,
+                    cantidad: this.cantidadRef.current.value,
+                    precio: res.data.product.precio
+                }
+                this.props.agregarArticulo(articulo);        
+            }else{
+                console.log('Error')
+                this.setState({
+                    message : res.data.message
+                })
+            }
+            
+            
+            console.log(res.data.message);
+            console.log(res.data.product);                
+            
+        });                           
+    }
+    
 
     validaTipo = () =>{        
         
@@ -93,14 +116,28 @@ class MovAlmacenForm extends Component {
         
     }
 
-    render() {
-        //console.log(this.state.motivo);
+    render() {        
         return (
             <aside id="sidebar">
                 <div id="articulo" className="sidebar-item">
                     <h3> </h3>
                     <p>Registrar un movimiento</p>
-                    <form className="mid-form" onSubmit={this.registarMov}>
+                    
+                    <div className="sidebar-item">
+                        <form className="mid-form" onSubmit = {this.agregarProducto} >
+                            <div>
+                                <label htmlFor="codigo"> Código del producto:</label>
+                                <input type="text" name="codigo" ref={this.codigoProductoRef} />
+                            </div>
+                            <div>
+                                <label htmlFor="cantidad">Cantidad:</label>
+                                <input type="text" name="cantidad" ref={this.cantidadRef} />
+                            </div>
+                            <input type="submit" name="submit" value="Agregar" className="btn" />
+                        </form>
+                    </div>
+
+                    <form className="mid-form" onSubmit={this.registrarMov}>
                         <div>
                             <label htmlFor="fecha">Fecha:</label>
                             <input type="text" name="fecha" ref={this.fechaRef} />
@@ -121,21 +158,7 @@ class MovAlmacenForm extends Component {
                         <input type="submit" name="submit" value="Registrar" className="btn" />
                     </form>
 
-                    <div className="sidebar-item">
-                        <form className="mid-form" >
-                            <div>
-                                <label htmlFor="codigo"> Código del producto:</label>
-                                <input type="text" name="codigo" ref={this.codigoProductoRef} />
-                            </div>
-                            <div>
-                                <label htmlFor="cantidad">Cantidad:</label>
-                                <input type="text" name="cantidad" ref={this.cantidadRef} />
-                            </div>
-
-
-                        </form>
-                    </div>
-
+                  
                 </div>
             </aside>
 

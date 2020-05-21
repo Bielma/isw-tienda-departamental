@@ -10,24 +10,24 @@ class Venta extends Component{
    
     state = {        
           articulos: [],
-          respuesta : ''
+          respuesta : '',
+          total: 0
     };
 
     agregarArticulo = (articulo) =>{
       
       this.setState({    
-        articulos : [...this.state.articulos, {codigo: articulo.codigo, nombre: articulo.nombre, cantidad: articulo.cantidad, precio: articulo.precio},] 
-        
+        articulos : [...this.state.articulos, {codigo: articulo.codigo, nombre: articulo.nombre, cantidad: articulo.cantidad, precio: articulo.precio},],
+        total: this.state.total + (articulo.precio * articulo.cantidad)
       })
-
-
       console.log(this.state.articulos)
     }
     
     guardarVenta = (detalles) =>
     {
       var venta = {};
-      venta['fecha'] = '20-05-14';
+      var d = new Date();
+      venta['fecha'] = d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate();
       venta['cliente'] = detalles.cod_cliente;
       venta["forma_pago"] = detalles.metodo_pago;
       venta['productos'] = this.state.articulos;
@@ -41,7 +41,7 @@ class Venta extends Component{
       .then(res =>{
         this.setState({
           succes : true,         
-          respuesta: res.data.message 
+          respuesta: res.data.message,          
       })
 
           console.log(res.status);
@@ -49,9 +49,9 @@ class Venta extends Component{
       });
       
     }
-    
-
+ 
     render(){         
+        console.log(this.state.total);
         var hayProductos = false;
         if(this.state.articulos.length >= 1){
           hayProductos =true;
@@ -63,7 +63,7 @@ class Venta extends Component{
               <div className = "center">
                 <section id = "content">
                 <h2>Articulos</h2>
-                <h4>{this.state.respuesta}</h4>
+                <h4>{this.state.message}</h4>
                   <section className = "componentes">                            
                       <table id = "tabla"  > 
                         <thead>
@@ -78,9 +78,14 @@ class Venta extends Component{
 
                           {
                              this.state.articulos.map(item =>(                                
-                                <Articulos  item = {item} key = {item.codigo} i ={1}/>                                
-                              ))                            
-                          }                          
+                                <Articulos  item = {item} key = {item.codigo} i ={1}/> 
+                              ))
+                              
+                              
+                          }   
+                            <tr key = {'total'}>
+                                <td>{'Total: ' + this.state.total}</td>
+                            </tr>                       
                         </tbody>
                       </table>
                   </section>

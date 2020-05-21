@@ -89,7 +89,7 @@ class AjusteInventarioForm extends Component {
                     <div className="sidebar-item">
                         <form className="mid-form" onSubmit={this.ajuste}>
 
-                            <input type="submit" name="submit" value="Crar Ajuste" className="btn" />
+                            <input type="submit" name="submit" value="Crear Ajuste" className="btn" />
                         </form>
                     </div>
 

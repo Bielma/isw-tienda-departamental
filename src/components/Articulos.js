@@ -43,6 +43,17 @@ class Articulos extends Component {
                 </tr>
             );
         }
+        else if(this.props.i === 5){
+            console.log("Tabla flujo de efectivo");
+            return (                                
+                <tr key={this.props.item.folio}>
+                    <td>{this.props.item.folio}</td>                    
+                    <td>{this.props.item.fecha}</td>                    
+                    <td>{this.props.item.hora}</td> 
+                    <td>{this.props.item.id_empleado}</td> 
+                </tr>
+            );
+        }
 
 
        

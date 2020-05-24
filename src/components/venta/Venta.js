@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Header from './Header.js';
-import Footer from './Footer.js'
-import Articulos from './Articulos';
+import Header from '../Header.js';
+import Footer from '../Footer.js'
+import Articulos from '../Articulos.js';
 import VentaForm from './VentaForm.js';
 import axios from 'axios';
 

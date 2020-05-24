@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from './Header.js';
 import Footer from './Footer';
-
+import SignIn from './signin.js'
 class Home extends Component {
     render() {
         return (

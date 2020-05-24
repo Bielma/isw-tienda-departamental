@@ -22,9 +22,9 @@ class Header extends Component{
                         <li>
                             <NavLink to ="/devolucion"activeClassName = "active">Devolucion</NavLink>      
                         </li>
-                            <NavLink to ="/mov_almacen" activeClassName = "active">Devolucion</NavLink>      
+                            <NavLink to ="/mov_almacen" activeClassName = "active">MovAlmacen</NavLink>      
                         <li>
-                            <NavLink to ="/ajuste_inventario">Devolucion</NavLink>      
+                            <NavLink to ="/ajuste_inventario">Ajustes</NavLink>      
                         </li>
                     </ul>
                 </nav>

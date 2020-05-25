@@ -5,7 +5,7 @@ class Empleados extends Component{
 
     render(){
         return(
-            <div className = datos>
+            <div className = "datos">
 
                 
             </div>

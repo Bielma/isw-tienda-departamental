@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Articulos extends Component {
+class BuscarForm extends Component {
 
     render() {               
         if (this.props.i ===1) {
@@ -71,4 +71,4 @@ class Articulos extends Component {
     }
 }
 
-export default Articulos;
+export default BuscarForm;

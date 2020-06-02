@@ -19,7 +19,8 @@ class SignIn extends Component {
             password: '',
             submitted: false,
             respuesta: '',
-            logeado: false            
+            logeado: false,
+            tipo: ''         
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -56,7 +57,8 @@ class SignIn extends Component {
                         localStorage.setItem('token', res.data.token);  
                         console.log("Succes login");
                         this.setState({
-                            logeado:true
+                            logeado:true,
+                            tipo: res.data.user.puesto
                         })
                     } else {
                         this.setState({
@@ -78,10 +80,30 @@ class SignIn extends Component {
         const { loggingIn } = this.props;
         const { username, password, submitted, logeado } = this.state;
         if (logeado) {
-            return (
-                <Redirect from="/signin" to="/venta" />
-            );
-
+           
+            console.log(this.state.tipo);
+            switch(this.state.tipo){
+                case 'Cajero':
+                    return (
+                        <Redirect from="/signin" to="/venta" />
+                    );
+                    break;
+                case 'Gerente' : 
+                    return (
+                        <Redirect from="/signin" to="/ventas" />
+                    );
+                        
+                break;
+                case 'Almacen':
+                    return (
+                        <Redirect from="/signin" to="/mov_almacen" />
+                    );
+                    break;
+                default:
+                    console.log("khe?");
+                break;
+            }
+            
         } else {
 
             

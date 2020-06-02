@@ -45,7 +45,9 @@ class Venta extends Component {
     let jsonVenta = JSON.stringify(venta);
     let datos = 'datos=' + jsonVenta;
 
-    axios.post('http://bielma.com/sem-isw/venta', datos)
+    axios.post('http://bielma.com/sem-isw/venta', datos,{ 
+      headers: { Authorization:  this.state.token }
+      })
       .then(res => {
 
 
@@ -63,7 +65,9 @@ class Venta extends Component {
         //console.log(res.status);
         console.log(res.data.message);
         console.log(this.state.totalEfectivo);
-      });
+      }, (error) => {
+        console.log(error);
+    });
 
   }
   hacerCorte = () => {
@@ -71,14 +75,16 @@ class Venta extends Component {
     var corte = {};
     var d = new Date();
     corte['fecha'] = d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate();
-    corte['empleado'] = 'rfc01';
+    corte['empleado'] = this.state.user.sub;
     corte["hora"] = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
     corte["monto"] = this.state.totalEfectivo;
     let jsonCorte = JSON.stringify(corte);
     let datos = 'datos=' + jsonCorte;
     console.log(datos);
 
-    axios.post('http://bielma.com/sem-isw/flujo', datos)
+    axios.post('http://bielma.com/sem-isw/flujo', datos, { 
+      headers: { Authorization:  this.state.token }
+      })
       .then(res => {
         if (res.status === 200) {
           this.setState({

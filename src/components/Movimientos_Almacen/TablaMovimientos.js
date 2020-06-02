@@ -20,7 +20,7 @@ class TablaMovientos extends Component {
                             </thead>
                             <tbody>
                                 {
-                                    this.props.articulos.map(item => (
+                                    this.props.movimientos.map(item => (
                                         <Articulos item={item} key={item.codigo} i={3} />
                                     ))
                                 }
@@ -38,14 +38,14 @@ class TablaMovientos extends Component {
                             <thead>
                                 <tr>
                                     <th>Producto</th>
-                                    <th>Cantidad</th>
-                                    <th>Precio</th>                                    
+                                    <th>Descripcion</th>
+                                    <th>Cantidad</th>                                    
                                 </tr>
                             </thead>
                             <tbody>
                                 {
                                     this.props.articulos.map(item => (
-                                        <Articulos item={item} key={item.codigo} i={4} />
+                                        <Articulos item={item} key={item.codigo} i={6} />
                                     ))
                                 }
                             </tbody>

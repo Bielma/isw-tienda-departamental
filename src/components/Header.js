@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import {Navbar,NavDropdown, Nav } from 'react-bootstrap';
-import {connect} from 'react-redux';
+import { Navbar, NavDropdown, Nav } from 'react-bootstrap';
+import { connect } from 'react-redux';
 
 
 class Header extends Component {
     render() {
-        const currentUser =  this.props.user;
-        
+        const currentUser = this.props.user;
+
         var tipoEmpleado = currentUser.puesto;
         if (tipoEmpleado === 'asd') {
             return (
@@ -18,21 +18,21 @@ class Header extends Component {
                                 <strong >Tienda </strong> Departamental
                                 </span>
                         </div>
-                        
+
                         <Nav className="mr-auto">
                             <Nav.Link >
-                                <NavLink to = "/venta">Venta</NavLink>
+                                <NavLink to="/venta">Venta</NavLink>
                             </Nav.Link>
                             <Nav.Link >
-                                <NavLink to = "/devolucion">Devolucion</NavLink>
+                                <NavLink to="/devolucion">Devolucion</NavLink>
                             </Nav.Link>
-                                            
+
                         </Nav>
                         <Navbar.Text>
                             Usuario: <a href="#login">Maria</a>
                         </Navbar.Text>
-                  
-                        
+
+
                         <div className="clearfix"></div>
                     </div>
                 </header>
@@ -50,19 +50,18 @@ class Header extends Component {
                         <nav id="menu">
                             <ul>
                                 <li>
-                                    <NavLink to="/">Inicio</NavLink>
+                                    <NavLink to="/mov_almacen" activeClassName="active">Nuevo movimiento</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to="/venta" activeClassName="active">Ventas</NavLink>
-                                </li>
-                                <li>
-                                    <NavLink to="/devolucion" activeClassName="active">Devoluciones</NavLink>
-                                </li>
-                                <NavLink to="/mov_almacen" activeClassName="active">MovAlmacen</NavLink>
-                                <li>
-                                    <NavLink to="/ajuste_inventario">Ajustes</NavLink>
+                                    <NavLink to="/allmovalmacen">Movimientos de Almacen</NavLink>
                                 </li>
                             </ul>
+                            <Navbar.Text>
+                                Usuario: {currentUser.nombre + ' ' + currentUser.apellido + '   '}
+                            </Navbar.Text>
+                            <Navbar.Text>
+                                <NavLink to="/signin">{"   Salir"}  </NavLink>
+                            </Navbar.Text>
                         </nav>
                         <div className="clearfix"></div>
                     </div>
@@ -81,20 +80,32 @@ class Header extends Component {
                         </div>
                         <nav id="menu">
                             <ul>
+
                                 <li>
-                                    <NavLink to="/">Inicio</NavLink>
+                                    <NavLink to="/ventas" activeClassName="active">Ventas</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to="/venta" activeClassName="active">Ventas</NavLink>
+                                    <NavLink to="/devoluciones" activeClassName="active">Devoluciones</NavLink>
+                                </li>
+                                    <NavLink to="/allmovalmacen" activeClassName="active">MovAlmacen</NavLink>
+                                <li>
+                                    <NavLink to="/ajustes_inventario">Ajustes</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to="/devolucion" activeClassName="active">Devoluciones</NavLink>
+                                    <NavLink to="/corte_caja">Corte</NavLink>
                                 </li>
-                                <NavLink to="/mov_almacen" activeClassName="active">MovAlmacen</NavLink>
                                 <li>
-                                    <NavLink to="/ajuste_inventario">Ajustes</NavLink>
+                                    <NavLink to="/flujo_efectivo">Flujo de Efectivo</NavLink>
                                 </li>
+                                <li>
+                                    <NavLink to="/signin">Salir</NavLink>
+                                </li>
+
                             </ul>
+                            <Navbar.Text>
+                                Usuario: {currentUser.nombre + currentUser.apellido}
+                            </Navbar.Text>
+
                         </nav>
                         <div className="clearfix"></div>
                     </div>
@@ -110,22 +121,22 @@ class Header extends Component {
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mr-auto">
                             <Nav.Link >
-                                <NavLink to = "/venta">Venta</NavLink>
+                                <NavLink to="/venta">Venta</NavLink>
                             </Nav.Link>
                             <Nav.Link >
-                                <NavLink to = "/devolucion">Devolucion</NavLink>
-                            </Nav.Link>                                            
+                                <NavLink to="/devolucion">Devolucion</NavLink>
+                            </Nav.Link>
                         </Nav>
                         <Navbar.Text>
-                            Usuario: {currentUser.nombre + currentUser.apellido}  
+                            Usuario: {currentUser.nombre + currentUser.apellido}
                         </Navbar.Text>
                         <Navbar.Text>
-                        <NavLink to = "/signin">Salir</NavLink>
+                            <NavLink to="/signin">Salir</NavLink>
                         </Navbar.Text>
                     </Navbar.Collapse>
                 </Navbar>
             );
-        }else{
+        } else {
             return (
                 <header id="header">
                     <div className="center">
@@ -137,11 +148,11 @@ class Header extends Component {
                         <nav id="menu">
                             <ul>
                                 <li>
-                                    <NavLink to = "/signin">Login</NavLink>
+                                    <NavLink to="/signin">Login</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to = "/signin">Registrar</NavLink>
-                                </li>                                
+                                    <NavLink to="/signin">Registrar</NavLink>
+                                </li>
                             </ul>
                         </nav>
                         <div className="clearfix"></div>
@@ -149,7 +160,7 @@ class Header extends Component {
                 </header>
             );
 
-            
+
         }
 
 

@@ -8,7 +8,9 @@ import FlujoForm from './FlujoForm.js';
 class FlujoEfectivo extends Component {
     state = {
         flujoDeEfectivo: [],
-        succes: false
+        succes: false,
+        user: JSON.parse(localStorage.getItem('user')),
+        token: localStorage.getItem('token'),
     };
 
     componentWillMount(){
@@ -41,7 +43,7 @@ class FlujoEfectivo extends Component {
         if(this.state.succes){
             return (
                 <div className="FormVenta">
-                    <Header />
+                    <Header user= {this.state.user}/>
     
                     <div className="center">
                         <section id="content">

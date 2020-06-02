@@ -49,7 +49,8 @@ class MovAlmacenForm extends Component {
                     codigo: res.data.product.id_producto,
                     nombre: res.data.product.nombre,
                     cantidad: this.cantidadRef.current.value,
-                    precio: res.data.product.precio
+                    precio: res.data.product.precio,
+                    descripcion: res.data.product.descripcion
                 }
                 this.props.agregarArticulo(articulo);        
             }else{
@@ -120,7 +121,7 @@ class MovAlmacenForm extends Component {
         return (
             <aside id="sidebar">
                 <div id="articulo" className="sidebar-item">
-                    <h3> </h3>
+                    <h3>{ this.props.msg}</h3>
                     <p>Registrar un movimiento</p>
                     
                     <div className="sidebar-item">

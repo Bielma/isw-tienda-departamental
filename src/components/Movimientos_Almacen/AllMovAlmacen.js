@@ -8,51 +8,64 @@ import axios from 'axios';
 
 class AllMovAlmacen extends Component {
     state ={
-        movimientos : []
+        movimientos : [],
+        succes: false,
+        user: JSON.parse(localStorage.getItem('user')),
+        token: localStorage.getItem('token')
+     
     }
-    agregarProductos = (productos) =>{
-        
-
-
+    componentWillMount(){
+        this.getMov();
     }
-    guardarMovAlmacen = (detalles) =>
-    {
-      var movAlmacen = {};
-      var d = new Date();
-      movAlmacen['fecha'] = d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate();    
-      movAlmacen["tipo"] = detalles.tipo;
-      movAlmacen['motivo'] = ;    
-      movAlmacen['empleado'] = 'bila97';
-      movAlmacen['productos'] = this.state.articulos;
-      let jsonVenta =  JSON.stringify(movAlmacen);
-      let datos = 'datos='+jsonVenta;
-      console.log(datos);
-      axios.post('http://bielma.com/sem-isw/mov',  datos)
-      .then(res =>{
-        this.setState({
-          succes : true,         
-          respuesta: res.data.message,          
-      })
-
-          console.log(res.status);
-          console.log(res.data.message);
-      });
-      
+    getMov = () =>{
+        axios.get('http://bielma.com/sem-isw/mov_almacen')
+        .then(res => {
+            if(res.data.status ==='succes'){
+                this.setState({
+                    movimientos : res.data.movAlmacen,
+                    succes: true                                    
+                })
+    
+            }
+            
+            //console.log(res.status);
+            console.log(this.state.movimientos);
+        },(error) => {
+            console.log(error);
+        });
     }
+  
 
     render() {
-        return (
-            <div className="MovimientoAlmacen">
-                <Header />
-                <div className="center">
-                   <TablaMovimientos movimientos = {this.state.movimientos}/>
-                   <MovAlmacenForm agregarMov = {this.guardarMovAlmacen}/>
-                    <div className="clearfix"></div>
+        if(this.state.succes){
+            return (
+                <div className="MovimientoAlmacen">
+                    <Header user = {this.state.user.puesto }/>
+                    <div className="center">
+                       <TablaMovimientos 
+                       movimientos = {this.state.movimientos}
+                       i = {1} />
+                       <MovAlmacenForm agregarMov = {this.guardarMovAlmacen}/>
+                        <div className="clearfix"></div>
+                    </div>
+                    <Footer />
                 </div>
-                <Footer />
-            </div>
+    
+            );
 
-        );
+        }else{
+            return (
+                <div className="MovimientoAlmacen">
+                  
+                    <div id="cargando">
+                      <h1>Cargando...</h1>                       
+                    </div>
+                   
+                </div>
+    
+            );
+        }
+        
     }
 
 }

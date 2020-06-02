@@ -3,8 +3,9 @@ import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
 import Venta from './components/venta/Venta.js';
 import Cliente from './components/Cliente.js';
 import Home from './components/Home.js';
-import Devolucion from './components/Devolucion.js
+import Devolucion from './components/Devolucion.js';
 import MovimientoAlmacen from './components/Movimientos_Almacen/MovimientoAlmacen.js';
+import AllMovAlmacen from './components/Movimientos_Almacen/AllMovAlmacen.js';
 import AjusteInventario from './components/ajuste_inventario/AjusteInventario.js';
 import FlujoEfectivo from './components/flujo_efectivo/FlujoEfectivo.js';
 import Empleado from './components/Empleado.js'
@@ -23,8 +24,12 @@ class Router extends Component{
                 <Route exact path = "/mov_almacen" component={MovimientoAlmacen}/>
                 <Route exact path = "/ajuste_inventario" component={AjusteInventario}/>
                 <Route exact path = "/empleado" component={Empleado}/>
-                <Route exact path = "/signin" component={SignIn}/>
-                <Redirect from = "/" to= "/venta"/>
+                <Route exact path = "/signin" component={SignIn}/>              
+                <Route exact path = "/allmovalmacen" component={AllMovAlmacen}/>
+                <Route exact path = "/flujo_efectivo" component={FlujoEfectivo}/>
+                
+                
+
             </Switch>
             </BrowserRouter>
         ); 

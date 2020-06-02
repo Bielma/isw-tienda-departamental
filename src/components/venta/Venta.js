@@ -98,7 +98,7 @@ class Venta extends Component {
     return (
       <div className="FormVenta">
         <Header />
-        <div className="center">
+        <div className="center2">
           <section id="content">
             <h2>Articulos</h2>
             <h4>{this.state.respuesta}</h4>

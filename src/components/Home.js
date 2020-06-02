@@ -10,11 +10,18 @@ class Home extends Component {
             <div id="home">
                 <Header/>
                 <div className = "center">                                    
-                    <div id="content " >
-                        <h1 className="subheader"> Hola </h1>
+                    <div id="content " >                   
+                        <h1>Bienvenido UwU</h1>
+                        <p> </p>
+                        <p> </p>
+                        <p> </p>
+                        <p> </p>
+                        <p> </p>
                     </div>
+                    
+                    <Footer/>
                 </div>
-                <SignIn/>
+               
             </div>
         );
     }

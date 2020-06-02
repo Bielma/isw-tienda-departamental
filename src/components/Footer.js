@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 
 const Footer = () =>{
     return (
-        <footer id = "footer">
-        <div className= "center">
+        <footer id = "footer2">
+        <div className= "center2">
           <p>
             &copy; Proyecto, Seminario de Ingeniería de Software, 20A.
           </p>

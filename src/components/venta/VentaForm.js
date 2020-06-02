@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import {NavLink} from 'react-router-dom';
+//import RegistrarEmpleado from '../c';
 class VentaForm extends Component {
 
     codigoProductoRef = React.createRef();
@@ -95,6 +97,7 @@ class VentaForm extends Component {
                                 <input type="text" name="cod-cliente" ref = {this.codClienteRef}/>                        
                             </div>
                                 <a href="#" className="btn btn-succes">Registrar cliente</a>
+                                
                                 <div className="radio-btns">
                                     <input type="radio" name="metodo-pago" value="Cash" ref = {this.cashRef}   checked={true}/> Cash
                                     <input type="radio" name="metodo-pago" value="Tarjeta" ref = {this.tarjetaRef}/> Tarjeta

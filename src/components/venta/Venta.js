@@ -13,7 +13,17 @@ class Venta extends Component {
     respuesta: '',
     total: 0,
     totalEfectivo: 0,
+    user: JSON.parse(localStorage.getItem('user')),
+    token: localStorage.getItem('token')
   };
+  componentWillMount(){
+  
+    
+
+
+    console.log(this.state.user.sub);
+    console.log(this.state.token);
+  }
 
   agregarArticulo = (articulo) => {
 
@@ -31,7 +41,7 @@ class Venta extends Component {
     venta['cliente'] = detalles.cod_cliente;
     venta["forma_pago"] = detalles.metodo_pago;
     venta['productos'] = this.state.articulos;
-    venta['id_empleado'] = 'bila97';
+    venta['id_empleado'] = this.state.user.sub;
     let jsonVenta = JSON.stringify(venta);
     let datos = 'datos=' + jsonVenta;
 
@@ -97,7 +107,7 @@ class Venta extends Component {
 
     return (
       <div className="FormVenta">
-        <Header />
+        <Header user = {this.state.user}/>
         <div className="center2">
           <section id="content">
             <h2>Articulos</h2>

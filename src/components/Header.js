@@ -4,14 +4,12 @@ import {Navbar,NavDropdown, Nav } from 'react-bootstrap';
 import {connect} from 'react-redux';
 
 
-
-
 class Header extends Component {
     render() {
-        const {currentUser} =  this.props;
-        //console.log(currentUser);
-        var tipoEmpleado = 5;
-        if (tipoEmpleado === 2) {
+        const currentUser =  this.props.user;
+        
+        var tipoEmpleado = currentUser.puesto;
+        if (tipoEmpleado === 'asd') {
             return (
                 <header id="header">
                     <div className="center">
@@ -39,7 +37,7 @@ class Header extends Component {
                     </div>
                 </header>
             );
-        } else if (tipoEmpleado === 2) {
+        } else if (tipoEmpleado === 'Almacen') {
 
             return (
                 <header id="header">
@@ -72,7 +70,7 @@ class Header extends Component {
             );
 
 
-        } else if (tipoEmpleado === 1) {
+        } else if (tipoEmpleado === 'Gerente') {
             return (
                 <header id="header">
                     <div className="center">
@@ -104,7 +102,7 @@ class Header extends Component {
             );
 
         }
-        else if (tipoEmpleado === 4) {
+        else if (tipoEmpleado === 'Cajero') {
             return (
                 <Navbar bg="light" expand="lg">
                     <Navbar.Brand >Tienda Departamental</Navbar.Brand>
@@ -116,11 +114,13 @@ class Header extends Component {
                             </Nav.Link>
                             <Nav.Link >
                                 <NavLink to = "/devolucion">Devolucion</NavLink>
-                            </Nav.Link>
-                                            
+                            </Nav.Link>                                            
                         </Nav>
                         <Navbar.Text>
-                            Usuario: {currentUser.nombre}
+                            Usuario: {currentUser.nombre + currentUser.apellido}  
+                        </Navbar.Text>
+                        <Navbar.Text>
+                        <NavLink to = "/signin">Salir</NavLink>
                         </Navbar.Text>
                     </Navbar.Collapse>
                 </Navbar>
@@ -156,10 +156,4 @@ class Header extends Component {
     }
 }
 
-const mapStateToProps = (state) =>{
-    return{
-        currentUser: state.currentUser,
-    };
-};
-
-export default connect(mapStateToProps)(Header);
+export default Header;

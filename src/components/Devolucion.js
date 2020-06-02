@@ -7,7 +7,9 @@ import axios from 'axios';
 
 class Devolucion extends Component {
     state = {
-        articulos: []
+        articulos: [],
+        user: JSON.parse(localStorage.getItem('user')),
+        token: localStorage.getItem('token')
     };
 
     agregarArticulo = (articulo) => {
@@ -24,7 +26,7 @@ class Devolucion extends Component {
         var d = new Date();
         var dev = {};
         dev['folioVenta'] = folio;
-        dev['empleado'] = 'rfc11';
+        dev['empleado'] = this.state.user.sub;
         dev["fecha"] =  d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate();
         dev['productos'] = this.state.articulos;
 
@@ -49,7 +51,7 @@ class Devolucion extends Component {
     render() {
         return (
             <div className="FormVenta">
-                <Header />
+                <Header user = {this.state.user}/>
                 <div className="center">
                     <section id="content">
                         <h2>Articulos</h2>

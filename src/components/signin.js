@@ -84,10 +84,10 @@ class SignIn extends Component {
 
         } else {
 
-
+            
             return (
                 <div id="cabeza">
-                    <Header />
+                    <Header user = {{puesto: ''}}/>
 
                     <div className="col-md-6 col-md-offset-3">
                         <h2>Login</h2>

@@ -12,19 +12,33 @@ class VentaForm extends Component {
     creditoRef = React.createRef();
     tarjetaRef = React.createRef();
               
+    state = {
+        msg : ''
+    }
     agregar = (e) => {
         e.preventDefault();        
         axios.get('http://bielma.com/sem-isw/producto/'+ this.codigoProductoRef.current.value)
         .then(res =>{
             if(res.status === 200){
-                var articulo = {
-                    codigo: this.codigoProductoRef.current.value,
-                    nombre: res.data.product.nombre ,
-                    cantidad: this.cantidadRef.current.value,
-                    precio: res.data.product.precio,
-                    descripcion: res.data.product.descripcion
+                if(this.cantidadRef.current.value > res.data.product.existencia ){
+                    this.setState({
+                        msg: 'Cantidad requerida supera la existencia'
+                    })     
+                }else{
+                    var articulo = {
+                        codigo: this.codigoProductoRef.current.value,
+                        nombre: res.data.product.nombre ,
+                        cantidad: this.cantidadRef.current.value,
+                        precio: res.data.product.precio,
+                        descripcion: res.data.product.descripcion
+                    }
+                    this.props.agregarArticulo(articulo);     
+                    this.setState({
+                        msg: ''
+                    })  
                 }
-                this.props.agregarArticulo(articulo);     
+                
+                
             }else{
 
             }
@@ -74,7 +88,7 @@ class VentaForm extends Component {
             return (
                 <aside id="sidebar">
                     <div id="articulo" className="sidebar-item">
-                        <h3></h3>
+                        <h3>{this.state.msg}</h3>
                         <p>Agregar un articulo</p>
 
                         <form className="mid-form" onSubmit={this.agregar}>

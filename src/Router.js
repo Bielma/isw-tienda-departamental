@@ -7,10 +7,13 @@ import Devolucion from './components/Devolucion.js';
 import MovimientoAlmacen from './components/Movimientos_Almacen/MovimientoAlmacen.js';
 import AllMovAlmacen from './components/Movimientos_Almacen/AllMovAlmacen.js';
 import AjusteInventario from './components/ajuste_inventario/AjusteInventario.js';
+import AjustesInventario from './components/ajuste_inventario/AjustesInventario.js';
 import FlujoEfectivo from './components/flujo_efectivo/FlujoEfectivo.js';
 import Empleado from './components/Empleado.js'
 import SignIn from './components/SignIn.js'
 import store from './redux/store.js'; 
+import Ventas from './components/venta/Ventas.js';
+import Devoluciones from './components/Devolucion/Devoluciones.js'
 class Router extends Component{
     render(){
         return(
@@ -27,8 +30,9 @@ class Router extends Component{
                 <Route exact path = "/signin" component={SignIn}/>              
                 <Route exact path = "/allmovalmacen" component={AllMovAlmacen}/>
                 <Route exact path = "/flujo_efectivo" component={FlujoEfectivo}/>
-                
-                
+                <Route exact path = "/ventas" component={Ventas}/>
+                <Route exact path = "/devoluciones" component={Devoluciones}/>
+                <Route exact path = "/ajustes_inventario" component={AjustesInventario}/>
 
             </Switch>
             </BrowserRouter>

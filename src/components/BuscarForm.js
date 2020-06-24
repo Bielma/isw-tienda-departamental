@@ -2,73 +2,38 @@ import React, { Component } from 'react';
 
 class BuscarForm extends Component {
 
-    render() {               
-        if (this.props.i ===1) {
-            console.log("Vista Venta");
-            return (
-                <tr key={this.props.item.codigo}>
-                    <td>{this.props.item.nombre}</td>
-                    <td>{this.props.item.precio}</td>
-                    <td>{this.props.item.cantidad}</td>
-                    <td>{this.props.item.cantidad * this.props.item.precio}</td>                                        
-                </tr>                
-                
-            );
-        } else if(this.props.i ===2 ){
-            console.log("Vista Devolucion");
-            return (                                
-                <tr key={this.props.item.codigo}>
-                    <td>{this.props.item.nombre}</td>                    
-                    <td>{this.props.item.cantidad}</td>
-                    <td>{this.props.item.motivo}</td>
-                </tr>
-            );
-        } else if(this.props.i ===3 ){
-            console.log("Vista Mov Almacen");
-            return (                                
-                <tr key={this.props.item.folio}>
-                    <td>{this.props.item.folio}</td>                    
-                    <td>{this.props.item.fecha}</td>                    
-                    <td>{this.props.item.tipo}</td>
-                    <td>{this.props.item.motivo}</td>
-                </tr>
+    folioRef = React.createRef();
+   
 
-            );
-        } else if(this.props.i ===4 ){
-            console.log("Vista Devolucion");
-            return (                                
-                <tr key={this.props.item.codigo}>
-                    <td>{this.props.item.nombre}</td>                    
-                    <td>{this.props.item.cantidad}</td> 
-                    <td>{this.props.item.precio}</td> 
-                </tr>
-            );
-        }
-        else if(this.props.i === 5){
-            console.log("Tabla flujo de efectivo");
-            return (                                
-                <tr key={this.props.item.folio}>
-                    <td>{this.props.item.folio}</td>                    
-                    <td>{this.props.item.fecha}</td>                    
-                    <td>{this.props.item.hora}</td> 
-                    <td>{this.props.item.id_empleado}</td> 
-                </tr>
-            );
-        }else if(this.props.i ===6 ){
-            console.log("Vista Devolucion");
-            console.log(this.props.item.descripcion);
-            return (                                
-                <tr key={this.props.item.codigo}>
-                    <td>{this.props.item.codigo}</td>                    
-                    <td>{this.props.item.descripcion}</td> 
-                    <td>{this.props.item.cantidad}</td> 
-                </tr>
-            );
-        }
+    
+   
+    buscar = (e) => {
+        e.preventDefault();          
 
-
-       
+        this.props.buscar(this.folioRef.current.value);
     }
+        
+    render() {
+        return (
+            <aside id="sidebar">
+                <div id="articulo" className="sidebar-item">
+                    <h3>{this.props.msg} </h3>
+                    <p>Buscar</p>
+                    <form className="mid-form" onSubmit={this.buscar}>                       
+                        <div>
+                            <label htmlFor="codigo"> Folio:</label>                            
+                            <input type="text" name="codigo" ref = {this.folioRef}/>                        
+                        </div>                                            
+                        <input type="submit" name="submit" value="Buscar" className="btn" />
+                    </form>
+                
+                </div>
+            </aside>
+
+
+        );
+    }
+    
 }
 
 export default BuscarForm;

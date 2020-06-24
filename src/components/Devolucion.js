@@ -4,12 +4,15 @@ import Footer from './Footer.js'
 import Articulos from './Articulos';
 import DevForm from './Devolucion/DevForm.js';
 import axios from 'axios';
+import Detalles from './Detalles.js'
 
 class Devolucion extends Component {
     state = {
         articulos: [],
         user: JSON.parse(localStorage.getItem('user')),
-        token: localStorage.getItem('token')
+        token: localStorage.getItem('token'),
+        mostrarDetalles: false,
+        respuesta: ''
     };
 
     agregarArticulo = (articulo) => {
@@ -33,11 +36,14 @@ class Devolucion extends Component {
         let jsonDev = JSON.stringify(dev);
         let datos = 'datos=' + jsonDev;
         console.log(datos);
-        axios.post('http://bielma.com/sem-isw/devolucion', datos)
+        axios.post('http://bielma.com/sem-isw/devolucion', datos,{ 
+            headers: { Authorization:  this.state.token }
+            })
             .then(res => {
                 this.setState({
                     succes: true,
-                    respuesta: res.data.message
+                    respuesta: res.data.message,
+                    mostrarDetalles : true
                 })
 
                 console.log(res.status);
@@ -48,13 +54,24 @@ class Devolucion extends Component {
         console.log(dev);
 
     }
+
+   
+
     render() {
+        const {mostrarDetalles} = this.state;
         return (
             <div className="FormVenta">
-                <Header user = {this.state.user}/>
+                <Header user = {this.state.user}/>          
+                { mostrarDetalles &&
+                        <Detalles                             
+                            i = {1} 
+                            msg = "Devolucion creado con exito"
+                            show = {true} />
+                }     
                 <div className="center">
                     <section id="content">
                         <h2>Articulos</h2>
+                        <h4>{this.state.respuesta}</h4>
                         <section className="componentes">
                             <table id="tabla"  >
                                 <thead>

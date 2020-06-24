@@ -21,7 +21,12 @@ class TablaMovientos extends Component {
                             <tbody>
                                 {
                                     this.props.movimientos.map(item => (
-                                        <Articulos item={item} key={item.codigo} i={3} />
+                                        <Articulos 
+                                        item={item} 
+                                        key={item.codigo} 
+                                        i={3} 
+                                        show = {this.props.show}
+                                        />
                                     ))
                                 }
                             </tbody>

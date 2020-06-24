@@ -67,7 +67,7 @@ class AjusteInventarioForm extends Component {
         return (
             <aside id="sidebar">
                 <div id="articulo" className="sidebar-item">
-                    <h3>{this.state.message} </h3>
+                    <h3>{this.props.msg} </h3>
                     <p>Agregar un articulo</p>
                     <form className="mid-form" onSubmit={this.agregar}>
 

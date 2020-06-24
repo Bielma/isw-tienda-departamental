@@ -4,7 +4,7 @@ import Footer from '../Footer.js'
 import Articulos from '../Articulos.js';
 import VentaForm from './VentaForm.js';
 import axios from 'axios';
-import Detalles from '../Detalles.js'
+
 
 class Venta extends Component {
 
@@ -14,8 +14,7 @@ class Venta extends Component {
     total: 0,
     totalEfectivo: 0,
     user: JSON.parse(localStorage.getItem('user')),
-    token: localStorage.getItem('token'),
-    mostrarDetalles: false
+    token: localStorage.getItem('token')
   };
   componentWillMount(){
   
@@ -58,9 +57,7 @@ class Venta extends Component {
             articulos: [],
             succes: true,
             respuesta: res.data.message,
-            total: 0,
-            mostrarDetalles: true
-
+            total: 0
           })
 
         }
@@ -108,7 +105,7 @@ class Venta extends Component {
       });
   }
   render() {
-    const {mostrarDetalles} = this.state;
+
     var hayProductos = false;
     if (this.state.articulos.length >= 1) {
       hayProductos = true;
@@ -117,13 +114,6 @@ class Venta extends Component {
     return (
       <div className="FormVenta">
         <Header user = {this.state.user}/>
-        { mostrarDetalles &&
-                        <Detalles 
-                            items = {null}
-                            i = {1} 
-                            msg = "Ajuste creado con exito"
-                            show = {true} />
-                    }
         <div className="center2">
           <section id="content">
             <h2>Articulos</h2>

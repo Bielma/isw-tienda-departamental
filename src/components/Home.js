@@ -8,7 +8,7 @@ class Home extends Component {
         return (
             
             <div id="home">
-                <Header/>
+                <Header user = {{puesto: ''}}/>
                 <div className = "center">                                    
                     <div id="content " >                   
                         <h1>Bienvenido UwU</h1>

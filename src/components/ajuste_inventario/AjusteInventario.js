@@ -4,10 +4,15 @@ import Footer from '../Footer.js'
 import Articulos from '../Articulos';
 import AjusteInventarioForm from './AjusteInvetarioForm.js';
 import axios from 'axios';
-
+import Alert from '../Alert.js'
 class AjusteInventario extends Component {
     state = {
-        articulos: []
+        articulos: [],
+        succes: false,
+        user: JSON.parse(localStorage.getItem('user')),
+        token: localStorage.getItem('token'),
+        msg: ''
+     
     };
 
     agregarArticulo = (articulo) => {
@@ -23,22 +28,27 @@ class AjusteInventario extends Component {
     guardarAjuste= () => {
         var d = new Date();
         var dev = {};        
-        dev['empleado'] = 'rfc11';
+        dev['empleado'] = this.state.user.sub;
         dev["fecha"] =  d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate();
         dev['productos'] = this.state.articulos;
 
         let jsonDev = JSON.stringify(dev);
         let datos = 'datos=' + jsonDev;
         console.log(datos);
-        axios.post('http://bielma.com/sem-isw/ajuste', datos)
+        axios.post('http://bielma.com/sem-isw/ajuste', datos, { 
+            headers: { Authorization:  this.state.token }
+            })
             .then(res => {
-                this.setState({
+                this.setState({                    
                     succes: true,
-                    respuesta: res.data.message
+                    msg: res.data.message,
+                    articulos: [],
                 })
 
                 console.log(res.status);
                 console.log(res.data.message);
+            }, (error) => {
+                console.log(error);
             });
 
 
@@ -46,12 +56,16 @@ class AjusteInventario extends Component {
 
     }
     render() {
+        const {succes} = this.state;
         return (
             <div className="FormVenta">
-                <Header />
+                <Header user = {this.state.user}/>
                 <div className="center">
+                    {succes &&
+                        <Alert show = {true} msg = "Ajuste creado con exito"/>
+                    }
                     <section id="content">
-                        <h2>Articulos</h2>
+                        <h2>Ajuste de Inventario</h2>
                         <section className="componentes">
                             <table id="tabla"  >
                                 <thead>
@@ -72,7 +86,11 @@ class AjusteInventario extends Component {
                             </table>
                         </section>
                     </section>
-                    <AjusteInventarioForm agregarArticulo={this.agregarArticulo} guardarAjuste={this.guardarAjuste} />
+                    <AjusteInventarioForm 
+                        agregarArticulo={this.agregarArticulo} 
+                        guardarAjuste={this.guardarAjuste} 
+                        msg = {this.state.msg}
+                        />
                     <div className="clearfix"></div>
                 </div>
                 <Footer />
